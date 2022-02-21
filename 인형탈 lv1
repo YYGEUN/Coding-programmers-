@@ -1,0 +1,16 @@
+def solution(board, moves):
+    basket = [0]
+    answer = 0
+    for i in moves:
+        for j in range(len(board)):
+            if board[j][i-1] != 0 :
+                if board[j][i-1] == basket[-1]:
+                    basket.pop()
+                    board[j][i-1] = 0
+                    answer += 1
+                    break
+                basket.append(board[j][i-1])
+                board[j][i-1] = 0
+                break
+    answer = answer * 2
+    return answer
