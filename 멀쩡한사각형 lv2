@@ -1,0 +1,17 @@
+def solution(w,h):
+    ratio = w/h
+    num = 0
+    answer = 0
+    for i in range(1,h+1):
+        num = i*ratio - int((i-1)*ratio)
+        answer += int(num)+1
+        if int(i*ratio) == i*ratio:
+            answer -= 1
+            a=h/i
+            answer = w*h - answer*a
+            return answer
+    
+    answer = w*h - answer
+    return answer
+    
+    ############### 77.8 #############
