@@ -1,0 +1,17 @@
+def solution(participant, completion):
+    runindex={}
+    for i in participant:
+        if i in runindex:
+            runindex[i] += 1
+        else:
+            runindex[i] = 1
+    
+    for i in completion:
+        if i in runindex:
+            runindex[i] -= 1
+    for i in runindex:
+        if runindex[i] == 1:
+            return i
+    print(runindex)
+        
+    return answer
