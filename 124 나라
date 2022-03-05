@@ -1,0 +1,41 @@
+def solution(n):
+    answer = ''
+    k = 18
+    while pow(3, k) > n:
+        k -= 1
+    third = []
+    number = []
+    answerlist = []
+    for i in range(1, 19):
+        third.append(pow(3, i))
+        number.append(sum(third[:i]))
+    start = 0
+    for i in range(len(number)):
+        if n <= number[i]:
+            start = i
+            break
+    if n > 3:
+        a = n - number[start-1] - 1
+    else:
+        a = n - 1
+    for _ in range(start+1):
+        stack = 0
+        while a >= pow(3,start) :
+            a -= pow(3,start)
+            stack += 1
+        start -= 1
+        answerlist.append(stack)
+    
+    for i in answerlist:
+        if i == 0:
+            answer += "1"
+        elif i == 1:
+            answer += "2"
+        else:
+            answer += "4"
+        
+
+    return answer
+    
+    
+    ############ 70점 효율성테스트 0점
