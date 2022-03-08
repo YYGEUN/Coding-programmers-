@@ -1,0 +1,22 @@
+from collections import defaultdict
+
+def solution(record):
+    unique = defaultdict()
+    texts = []
+    ordering =[]
+    for i in record:
+        a = i.split()
+        if a[0] == "Enter":
+               texts += ["님이 들어왔습니다."]
+               unique[a[1]] = a[2]
+               ordering += [a[1]]
+        elif a[0] == "Leave":
+               texts += ["님이 나갔습니다."]
+               ordering += [a[1]]
+        else:
+            unique[a[1]] = a[2]
+    answer = []
+    
+    for i in range(len(ordering)):
+        answer += [unique[ordering[i]] + texts[i]]
+    return answer
