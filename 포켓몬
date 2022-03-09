@@ -1,0 +1,18 @@
+from collections import defaultdict
+
+def solution(nums):
+    anlist = defaultdict(int)
+    keylist = []
+    num = len(nums)//2
+    answer = 0
+    for i in nums:
+        anlist[i] += 1
+    for i in anlist.keys():
+        keylist.append(i)
+    
+    if len(keylist) >= num:
+        answer = num
+    else:
+        answer = len(keylist)
+            
+    return answer
