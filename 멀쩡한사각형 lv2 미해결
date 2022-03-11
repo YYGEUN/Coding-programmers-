@@ -15,3 +15,13 @@ def solution(w,h):
     return answer
     
     ############### 77.8 #############
+
+
+from math import gcd
+
+def solution(w,h):
+    answer = w * h -( w+h-gcd(w,h))
+    return answer
+    
+    
+## 시작점은 가로 세로 무조건 겹치므로 최소공약수( 잘리는단위) 마다 1씩 빼주면됨
