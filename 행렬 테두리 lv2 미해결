@@ -30,3 +30,43 @@ def solution(rows, columns, queries):
         
         
     return answer
+    
+    matrix 에 matrix 로변환시 기존 값이 사라져서 불가능 
+    
+    -------------------------------------------------------------
+    
+    def solution(rows, columns, queries):
+    answer = []
+    num = []
+    matrix = []
+    matrixorigin = []
+    matrix += [[0]*columns]
+    matrixorigin += [[0]*columns]
+    temp = []
+    for i in range(columns):
+        temp = [0]
+        for j in range(1,rows+1):
+            temp.append(i*columns+j)
+        matrix.append(temp)
+        matrixorigin.append(temp)
+        
+    for i in queries:
+        temp = []
+        temp.append([matrix[i[0]][i[1]:i[3]+1]])
+        for j in range(i[0],i[2]+1):
+            temp.append([matrix[j][i[3]]])
+        # temp.append([matrix[i[2]][i[1]:i[3]+1],-1])
+        print(temp)
+        
+        
+#         for j in range(1,i[2]-i[0]+1):
+#             matrix[i[0]+j][i[3]] = matrixorigin[i[0]+j-1][i[3]]
+
+#         for j in range(1,i[3]-i[1]+1):
+#             matrix[i[2]][i[3]-j] = matrixorigin[i[2]][i[3]-j+1]
+
+#         for j in range(1,i[2]-i[0]+1):
+#             matrix[i[2]-j][i[1]] = matrixorigin[i[2]-j-1][i[1]]        
+        
+        
+    return answer
