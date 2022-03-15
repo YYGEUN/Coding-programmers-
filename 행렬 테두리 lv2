@@ -79,3 +79,51 @@ def solution(rows, columns, queries):
     return answer
     
     ### 테스트통과 3번부터 틀림
+    
+    
+    def solution(rows, columns, queries):
+    answer = []
+    num = []
+    matrix = []
+    matrix += [[0]*(columns+1)]
+    temp = []
+    
+    
+    
+    for i in range(rows):
+        temp = [0]
+        for j in range(1,columns+1):
+            temp.append(i*columns+j)
+        matrix.append(temp)
+    
+    print(matrix)
+    
+    for i in queries:
+        print(matrix[i[0]][i[1]],matrix[i[2]][i[3]])
+        temp = []
+        temp += matrix[i[0]][i[1]:i[3]+1]
+        for j in range(1,i[2]-i[0]+1):
+            temp += [matrix[i[0]+j][i[3]]]
+        for j in range(1,i[3]-i[1]+1):
+            temp += [matrix[i[2]][i[3]-j]]
+        for j in range(1,i[2]-i[0]):
+            temp += [matrix[i[2]-j][i[1]]]
+            
+        a = temp.pop()
+        temp = [a] + temp
+        answer += [min(temp)]
+        
+        matrix[i[0]][i[1]:i[3]+1] = temp[:i[3]-i[1]+1]
+        for j in range(1,i[2]-i[0]+1):
+            matrix[i[0]+j][i[3]] = temp[i[3]-i[1]+j]
+            a = i[3]-i[1]+j
+        for j in range(1,i[3]-i[1]+1):
+            matrix[i[2]][i[3]-j] = temp[a+j]
+            b = a+j
+        for j in range(1,i[2]-i[0]):
+            matrix[i[2]-j][i[1]] = temp[b+j]
+    
+        
+        
+    return answer
+########## 기본 행렬 만들기 x/y 
