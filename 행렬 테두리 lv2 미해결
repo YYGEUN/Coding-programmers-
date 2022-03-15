@@ -35,38 +35,47 @@ def solution(rows, columns, queries):
     
     -------------------------------------------------------------
     
-    def solution(rows, columns, queries):
+def solution(rows, columns, queries):
     answer = []
     num = []
     matrix = []
-    matrixorigin = []
-    matrix += [[0]*columns]
-    matrixorigin += [[0]*columns]
+    matrix += [[0]*(columns+1)]
     temp = []
-    for i in range(columns):
+    
+    for i in range(rows):
         temp = [0]
-        for j in range(1,rows+1):
-            temp.append(i*columns+j)
+        for j in range(1,columns+1):
+            temp.append(i*rows+j)
         matrix.append(temp)
-        matrixorigin.append(temp)
-        
+    
+    print(len(matrix[0]))
+    
     for i in queries:
         temp = []
-        temp.append([matrix[i[0]][i[1]:i[3]+1]])
-        for j in range(i[0],i[2]+1):
-            temp.append([matrix[j][i[3]]])
-        # temp.append([matrix[i[2]][i[1]:i[3]+1],-1])
-        print(temp)
+        temp += matrix[i[0]][i[1]:i[3]+1]
+        for j in range(1,i[2]-i[0]+1):
+            temp += [matrix[i[0]+j][i[3]]]
+        for j in range(1,i[3]-i[1]+1):
+            temp += [matrix[i[2]][i[3]-j]]
+        for j in range(1,i[2]-i[0]):
+            temp += [matrix[i[2]-j][i[1]]]
+            
+        a = temp.pop()
+        temp = [a] + temp
+        answer += [min(temp)]
         
-        
-#         for j in range(1,i[2]-i[0]+1):
-#             matrix[i[0]+j][i[3]] = matrixorigin[i[0]+j-1][i[3]]
-
-#         for j in range(1,i[3]-i[1]+1):
-#             matrix[i[2]][i[3]-j] = matrixorigin[i[2]][i[3]-j+1]
-
-#         for j in range(1,i[2]-i[0]+1):
-#             matrix[i[2]-j][i[1]] = matrixorigin[i[2]-j-1][i[1]]        
+        matrix[i[0]][i[1]:i[3]+1] = temp[:i[3]-i[1]+1]
+        for j in range(1,i[2]-i[0]+1):
+            matrix[i[0]+j][i[3]] = temp[i[3]-i[1]+j]
+            a = i[3]-i[1]+j
+        for j in range(1,i[3]-i[1]+1):
+            matrix[i[2]][i[3]-j] = temp[a+j]
+            b = a+j
+        for j in range(1,i[2]-i[0]):
+            matrix[i[2]-j][i[1]] = temp[b+j]
+    
         
         
     return answer
+    
+    ### 테스트통과 3번부터 틀림
