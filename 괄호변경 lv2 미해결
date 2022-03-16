@@ -1,0 +1,46 @@
+def solution(p):
+    y = 0
+    x = 0
+    for i in p:
+        if x > y:
+            break
+        if i == "(":
+            y += 1
+            continue
+        else:
+            x += 1
+        if x+y == len(p):
+            return p
+    
+    answer = ''
+    return answer
+
+def check(p):
+    for i in p:
+        if x > y:
+            break
+        if i == "(":
+            y += 1
+            continue
+        else:
+            x += 1
+        if x+y == len(p):
+            return p
+    
+    
+
+def devide(p):
+    x,o=0,0
+    u = []
+    v = []
+    for i in range(len(p)):
+        if p[i] == "(":
+            o += 1
+        else:
+            x += 1
+        if x == o :
+            u = p[:i+1]
+            v = p[i+1:]
+    
+    
+        
