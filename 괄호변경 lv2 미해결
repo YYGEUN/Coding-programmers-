@@ -106,3 +106,67 @@ def devide(p, answer):
     devide(v, answer)
 
 solution("()))((()")
+ ##############################################
+ def solution(p):
+    global answer
+    answer = ''
+    y = 0
+    x = 0
+    for i in p:
+        if x > y:
+            break
+        if i == "(":
+            y += 1
+            continue
+        else:
+            x += 1
+        if x + y == len(p):
+            return p
+
+    answer = devide(p, answer)
+
+    return answer
+
+
+def check(u,answer):
+    if not u :
+        return answer
+
+    if u[0] == "(":
+        u = "".join(u[0:len(u)])
+        return u
+    else:
+        for i in range(1, len(u) - 1):
+            if u[i] == "(":
+                u[i] = ")"
+            else:
+                u[i] = "("
+    u = "(" + "".join(u[1:len(u) - 1]) + ")"
+    return u
+
+
+def devide(p, answer):
+    x, o = 0, 0
+    u = []
+    v =[]
+    for i in range(len(p)):
+        if p[i] == "(":
+            o += 1
+        else:
+            x += 1
+        if x == o:
+            u += p[i]
+            v = p[i + 1:]
+            break
+        else:
+            u += p[i]
+    # print("답1", answer)
+    # print(check(u,answer))
+    # print("답2",answer,u,v)
+    answer += check(u, answer)
+    
+    if not v:
+        return answer
+
+    devide(v, answer)
+    ####  solution의 print(answer)에서는 답이 나오지만 출력값이없다
