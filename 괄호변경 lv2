@@ -245,3 +245,74 @@ def devide(p, answer):
     return answer
     
     #### 36점
+    
+    def solution(p):
+    answer = ''
+    if check(p) == p:
+        answer = p
+        return answer
+
+    devide(p,answer)
+
+    return devide(p,answer)
+
+
+def check(p):
+    y = 0
+    x = 0
+    for i in p:
+        if x > y:
+            break
+        if i == "(":
+            y += 1
+            continue
+        else:
+            x += 1
+        if x + y == len(p):
+            return p
+
+
+def devide(p, answer):
+    x, o = 0, 0
+    u = []
+    v = []
+
+    if not p:
+        return ""
+
+    for i in range(len(p)):
+        if p[i] == "(":
+            o += 1
+        else:
+            x += 1
+        if x == o:
+            u += p[i]
+            v = p[i + 1:]
+            break
+        else:
+            u += p[i]
+
+
+
+    
+    if not u:
+        return
+
+    if check(u) == u:
+        u = "".join(u[0:len(u)])
+        
+        if not v:
+            return u
+        else:
+            answer = u + devide(v,answer)
+    else:
+
+        for i in range(1, len(u) - 1):
+            if u[i] == "(":
+                u[i] = ")"
+            else:
+                u[i] = "("
+
+        answer += "(" + devide(v,answer) + ")" + "".join(u[1:len(u) - 1])
+
+    return answer
