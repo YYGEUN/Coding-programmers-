@@ -1,1 +1,58 @@
-미해결
+from collections import defaultdict
+
+def solution(str1, str2):
+    str1 = str1.lower()
+    str2 = str2.lower()
+    s1 =[]
+    s2 =[]
+    for i in range(len(str1)-1):
+        if not str1[i:i+2].isalpha():
+            continue
+        else:
+            s1.append(str1[i:i+2])
+        
+    for i in range(len(str2)-1):
+        if not str2[i:i+2].isalpha():
+            continue
+        else:
+            s2.append(str2[i:i+2])
+    
+    ch1 = defaultdict(int)
+    ch2 = defaultdict(int)
+    
+    for i in s1:
+        ch1[i] += 1
+    
+    for i in s2:
+        ch2[i] += 1
+    
+    ss1 = set(s1)
+    ss2 = set(s2)
+    intersect = ss1 & ss2
+    union = ss1|ss2
+    
+    
+    ja = 0
+    mo = 0
+    
+    for i in intersect:
+        if ch1[i] >= ch2[i]:
+            ja += ch2[i]
+        else:
+            ja += ch1[i]
+    
+    for i in union:
+        if ch1[i] >= ch2[i]:
+            mo += ch1[i]
+        else:
+            mo += ch2[i]
+    
+    if ja == 0 or mo == 0:
+        return 65536
+    
+    answer = int((ja/mo) * 65536)
+    return answer
+    
+    ###### 83점
+    
+    
