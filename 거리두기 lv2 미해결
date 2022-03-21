@@ -1,0 +1,13 @@
+def solution(places):
+    answer = []
+    p자리 뽑기
+    count2 까지 이동
+    
+    return answer
+
+def move(pos,move):
+    for i in move:
+        if places[pos[0]+i[0]][pos[1]+i[1]] == "X":
+            return
+        elif places[pos[0]+i[0]][pos[1]+i[1]] == "P":
+            return
