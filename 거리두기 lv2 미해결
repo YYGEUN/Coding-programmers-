@@ -70,3 +70,74 @@ def solution(places):
 #         elif places[pos[0]+i[0]][pos[1]+i[1]] == "P":
 #             return
 ######### 검토가 필요한 P위치 판별 
+
+def solution(places):
+    answer = [1] * len(places)
+
+    pposition = []
+    for k in places:
+        temp = []
+        for i in range(5):
+            for j in range(5):
+                if k[i][j] == "P":
+                    temp.append([i, j])
+
+        pposition.append(temp)
+
+    check = []
+
+    for i in range(len(pposition)):
+        temp = []
+        for j in pposition[i]:
+            for k in pposition[i]:
+                if abs(j[0] - k[0]) + abs(j[1] - k[1]) == 1:
+                    answer[i] = 0
+                if abs(j[0] - k[0]) + abs(j[1] - k[1]) == 2:
+                    temp.append(j)
+                    break
+        check.append(temp)
+
+    for i in range(len(check)):
+        for j in check[i]:
+
+            if answer[i] == 0:
+                break
+
+            if not j[1] == 0:
+                if places[i][j[0]][j[1] - 1] == "X":
+                    pass
+                elif j[0] + 1 <= 4 and places[i][j[0] + 1][j[1] - 1] == "P":
+                    answer[i] = 0
+                    print("case1")
+                    break
+            if not j[1] == len(places[i][1])-1:
+                if places[i][j[0]][j[1] + 1] == "X":
+                    pass
+                elif j[0] + 1 <= 4 and places[i][j[0] + 1][j[1] + 1] == "P":
+                    answer[i] = 0
+                    print("case2")
+                    break
+                elif j[1] + 2 <= 4 and places[i][j[0]][j[1] + 2] == "P":
+                    answer[i] = 0
+                    print("case2")
+                    break
+
+            if not j[0] == len(places[i])-1:
+                if places[i][j[0] + 1][j[1]] == "X":
+                    pass
+                elif j[1] + 1 <= 4 and places[i][j[0] + 1][j[1] + 1] == "P":
+                    answer[i] = 0
+                    print("case3")
+                    break
+                elif j[1] - 1 >= 0 and places[i][j[0] + 1][j[1] - 1] == "P":
+                    answer[i] = 0
+                    print("case4")
+                    break
+                elif j[0] + 2 <= 4 and places[i][j[0] + 2][j[1]] == "P":
+                    answer[i] = 0
+                    print("case5")
+                    break
+
+    return answer
+    
+    ############### 케이스3번 탈락 96점
