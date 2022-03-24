@@ -184,4 +184,48 @@ def solution(places):
     
     return answer 
     
-    ############# 0 주위 p가 2개면 지키지않음 + pp 검출
+    ############# 0 주위 p가 2개면 지키지않음 + pp 검출 방법 찾기 필요
+    
+    
+    def solution(places):
+    
+    answer = [1] * len(places)
+
+    for i in range(len(places)):
+        for j in range(5):
+            for k in range(5):
+                count = 0
+                if places[i][j][k] == "O" :
+                    print(j,k,places[i][j][k])
+                    if k >= 1 and places[i][j][k-1] == "P":
+                        count += 1
+                    if k <= 3 and places[i][j][k+1] == "P":
+                        count += 1
+                    if j >= 1 and places[i][j-1][k] == "P":
+                        count += 1
+                    if j <= 3 and places[i][j+1][k] == "P":
+                        count += 1
+                
+                    if count >= 2:
+                        answer[i] = 0
+                        break
+
+                        
+                if places[i][j][k] == "P" :
+
+                    if k >= 1 and places[i][j][k-1] == "P":
+                        answer[i] = 0
+                        break
+                    if k <= 3 and places[i][j][k+1] == "P":
+                        answer[i] = 0
+                        break
+                    if j >= 1 and places[i][j-1][k] == "P":
+                        answer[i] = 0
+                        break
+                    if j <= 3 and places[i][j+1][k] == "P":
+                        answer[i] = 0
+                        break
+                
+    
+    return answer
+    
