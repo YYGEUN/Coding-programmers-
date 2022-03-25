@@ -1,1 +1,26 @@
-ㅇ
+from itertools import permutations
+from collections import defaultdict
+def solution(expression):
+    check = []
+    num = []
+    numset = []
+    temp = ""
+    for i in expression:
+        if not i.isdigit():
+            check.append(i)
+            if not i in numset:
+                numset.append(i)
+            num.append(temp)
+            temp = ""
+        else:
+            temp += i
+    num.append(temp)
+    
+    perm = permutations(numset)
+    
+    print(check,num,numset)
+    
+    for i in perm:
+        for j in i:
+            while check:
+                x = check[k]
