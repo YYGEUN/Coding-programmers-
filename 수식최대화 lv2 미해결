@@ -24,3 +24,67 @@ def solution(expression):
         for j in i:
             while check:
                 x = check[k]
+
+############################################
+
+from itertools import permutations
+from collections import defaultdict
+def solution(expression):
+    check = []
+    num = []
+    numset = []
+    temp = ""
+    for i in expression:
+        if not i.isdigit():
+            check.append(i)
+            if not i in numset:
+                numset.append(i)
+            num.append(temp)
+            temp = ""
+        else:
+            temp += i
+    num.append(temp)
+    
+    perm = list(permutations(numset))
+    
+    print(check)
+
+    for i in range(len(perm)):
+        answer = max(circle(perm[i],check,num),0)
+    
+#     for k in range(len(perm)):
+#         for i in perm[k]:
+#             while i in check:
+#                 if i == "-":
+#                     num[check.index(i)] = str(int(num[check.index(i)]) - int(num[check.index(i)+1]))
+#                     del num[check.index(i)+1]
+#                 elif i == "+":
+#                     num[check.index(i)] = str(int(num[check.index(i)]) + int(num[check.index(i)+1]))
+#                     del num[check.index(i)+1]
+#                 else:
+#                     num[check.index(i)] = str(int(num[check.index(i)]) * int(num[check.index(i)+1]))
+#                     del num[check.index(i)+1]
+#                 check.remove(i)
+        
+#             answer.append(abs(int(num[0])))
+    
+    return answer
+
+def circle(perm,check,num):
+    print(num)
+    for i in perm:
+        while i in check:
+            if i == "-":
+                num[check.index(i)] = str(int(num[check.index(i)]) - int(num[check.index(i)+1]))
+                del num[check.index(i)+1]
+            elif i == "+":
+                num[check.index(i)] = str(int(num[check.index(i)]) + int(num[check.index(i)+1]))
+                del num[check.index(i)+1]
+            else:
+                num[check.index(i)] = str(int(num[check.index(i)]) * int(num[check.index(i)+1]))
+                del num[check.index(i)+1]
+            check.remove(i)
+    print(int(num[0]),num)
+            
+    return abs(int(num[0]))
+    #### 변하지않는 변수 지정 방법 찾기 필요
